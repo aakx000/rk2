@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "example_application/example2.cpp"
+#include "example2.cpp"
 #include <string>
 
 Test(Fan, SetCircuitTringle) {
