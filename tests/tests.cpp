@@ -3,31 +3,38 @@
 #include "example2.cpp"
 #include <string>
 
-Test(Fan, SetCircuitTringle) {
-    Fan fan;
+class MockFan: public Fan {
+    public:
+    MockFan() : Fan() {}
+};
+
+
+
+Test(MockFan, SetCircuitTringle) {
+    MockFan fan;
     
     testing::internal::CaptureStdout();
-    fan.SetCircuitTringle();
+    fan.Fan::SetCircuitTringle();
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "SetPower In Tringle toplogy circuit\n");
     
     testing::internal::CaptureStdout();
-    fan.SetCircuitStar();
+    fan.Fan::SetCircuitStar();
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "SetPower In star toplogy circuit\n");
     
     testing::internal::CaptureStdout();
-    fan.ConnectPower();
+    fan.Fan::ConnectPower();
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Connect Power\n");
     
     testing::internal::CaptureStdout();
-    fan.DisconnectPower();
+    fan.Fan::DisconnectPower();
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Disconnect Power\n");
     
     testing::internal::CaptureStdout();
-    fan.Delay(2000);
+    fan.Fan::Delay(2000);
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "wait for 2000 miliseconds\n");
 }
