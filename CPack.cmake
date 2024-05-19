@@ -2,7 +2,7 @@ include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_CONTACT XXX@gmail.com)
 set(CPACK_PACKAGE_VERSION ${PRINT_VERSION})
-set(CPACK_PACKAGE_NAME "solver")
+set(CPACK_PACKAGE_NAME "example")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "fan remote")
 set(CPACK_PACKAGE_VENDOR "aakx000")
 set(CPACK_PACKAGE_PACK_NAME "example-${PRINT_VERSION}")
