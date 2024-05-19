@@ -1,0 +1,30 @@
+name: CMake
+
+on:
+ push:
+  branches: [main]
+ pull_request:
+  branches: [main]
+
+jobs: 
+ build_Linux:
+
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v3
+
+  - name: Adding gtest
+    run: git clone https://github.com/google/googletest.git third-party/gtest -b release-1.11.0
+
+  - name: Config example with tests
+    run: cmake -H. -B ${{github.workspace}}/build -DBUILD_TESTS=ON
+
+  - name: Build example
+    run: cmake --build ${{github.workspace}}/build
+    
+  - name: Run example
+    run: build/example
+
+  - name: Run tests
+    run: build/check
