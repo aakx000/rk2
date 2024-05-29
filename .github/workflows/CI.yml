@@ -11,7 +11,7 @@ jobs:
 
       - name: Configure and Build example
         run: |
-          cd code
+          cd example
           cmake -B build
           cmake --build build
           build/example
