@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "example2.cpp"
 #include "header.h"
 #include <string>
 
