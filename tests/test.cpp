@@ -51,6 +51,6 @@ TEST(Controller, TurnOffFanCommand) {
     testing::internal::CaptureStdout();
     controller.ButtonClicked();
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "Disconnect Power\n");
+    EXPECT_EQ(output, "SetPower In star toplogy circuit\nConnect Power\nwait for 20000 miliseconds\nSetPower In Tringle toplogy circuit\n");
 }
 
