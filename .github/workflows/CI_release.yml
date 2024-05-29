@@ -1,39 +1,32 @@
-name: CMake Build and Release
+name: CPack
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+ push:
+   tags:
+     - 'v*.*.*.*'
 
-jobs:
-  build_and_release:
+jobs: 
+
+  build_Linux:
+
     runs-on: ubuntu-latest
+    
     permissions:
       contents: write
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - name: Configure code
+      run: |
+        cmake -B build
+        cmake --build build
+    - name: Build package
+      run: cmake --build build --target package
+    - name: Build source package
+      run: cmake --build build --target package_source
 
-      - name: Configure 
-        run: cmake ${{github.workspace}} -B ${{github.workspace}}/build -D PRINT_VERSION=${GITHUB_REF_NAME#v}
-
-      - name: Build 
-        run: cmake --build ${{github.workspace}}/build
-
-      - name: Build 
-        run: cmake --build ${{github.workspace}}/build --target package
-
-      - name: Build Source Package
-        run: cmake --build ${{github.workspace}}/build --target package_source
-
-      - name: Make a Release
-        uses: ncipollo/release-action@v1.14.0
-        with:
-          artifacts: |
-            DEB
-            RPM
-            tar.gz
-            zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Make a release
+      uses: ncipollo/release-action@v1.14.0
+      with:
+        artifacts: "build/*.tar.gz,build/*.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,29 +1,29 @@
 name: Build
-
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
 jobs:
-  build:
+  build-project:
+    name: Build Project
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4.1.2
 
-    - name: Set up CMake
-      run: sudo apt-get install -y cmake
-
-    - name: Build
-      run: |
-        cmake -S . -B build
-        cmake --build build --config Release
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: executable
-        path: build/example2
+      - name: Configure and Build example
+        run: |
+          cd code
+          cmake -B build
+          cmake --build build
+          build/example
+      
+      - name: Test
+        run: |
+          cmake -B build
+          cmake --build build
+          build/test
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: executable
+          path: build
