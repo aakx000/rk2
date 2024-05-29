@@ -4,5 +4,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(header STATIC header.h)
+set_target_properties(header PROPERTIES LINKER_LANGUAGE CXX)
 
 add_executable(example example2.cpp)
